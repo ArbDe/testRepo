@@ -21,10 +21,10 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            # List all folders in the bucket
-            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk -F'/' 'NF==2{print $1}'|sort -u)
+            
+              folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk -F'/' 'NF==2{print $1}'|sort -u)
 
-            # Loop through the folders and print their names
-            for folder in $folders; do
-              echo "$folder"
-            done
+          
+              for folder in $folders; do
+                echo "$folder"
+              done
