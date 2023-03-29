@@ -15,8 +15,9 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-        role-to-assume: arn:aws:iam::116060500502:role/IAM-Delete-Folders
-        aws-region: us-east-1
+       aws-access-key-id: AKIARWBN6WILAX7UHBP6
+       aws-secret-access-key: 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
+       aws-region: us-east-1
 
     - name: List S3 bucket folders
       run: |
