@@ -22,8 +22,9 @@ jobs:
     - name: List S3 bucket folders
       run: |
             folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk -F'/' 'NF==2{print $1}'|sort -u)
+            echo 'asdasd'
 
           
             for folder in $folders; do
-              echo "$folder"
+              echo '$folder'
             done
