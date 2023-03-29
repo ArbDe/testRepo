@@ -15,16 +15,16 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-       aws-access-key-id: AKIARWBN6WILAX7UHBP6
-       aws-secret-access-key: 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
+       aws-access-key-id: AKIA3JFGV77ZKCMSAQAA
+       aws-secret-access-key: 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
        aws-region: us-east-1
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive "Contents[?LastModified<=\`$(date -v-1d '+%Y-%m-%d')\`][].{object: Key}" | awk '{print $1}' | xargs -n 1 basename)
-            echo $folders
+            folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive | awk '{print $4}' | xargs -n 1 basename)
 
-
+              echo $folders
+            
             for folder in $folders; do
               echo $folder
             done
