@@ -21,7 +21,7 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk '{print $4}')
+            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk '{print $4}' | xargs -n 1 basename)
             echo $folders
 
           
