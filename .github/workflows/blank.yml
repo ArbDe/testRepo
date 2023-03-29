@@ -21,8 +21,10 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive | -mtime +7 -type d | xargs -n 1 basename)
+            folders=$(aws s3 ls s3://beni-bucket/testFolder/)
+            
+            echo $folder
 
             for folder in $folders; do
-              echo $folder
+              #echo $folder
             done
