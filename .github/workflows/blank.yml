@@ -24,6 +24,5 @@ jobs:
             folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive | -mtime +7 -type d | xargs -n 1 basename)
 
             for folder in $folders; do
-              
               echo $folder
             done
