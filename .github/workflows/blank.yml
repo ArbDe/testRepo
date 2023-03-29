@@ -23,8 +23,8 @@ jobs:
       run: |
             folders=$(aws s3 ls s3://beni-bucket/testFolder/)
             
-            echo $folder
+            echo $folders
 
             for folder in $folders; do
-              #echo $folder
+              echo $folder
             done
