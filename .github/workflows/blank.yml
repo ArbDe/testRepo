@@ -26,7 +26,7 @@ jobs:
 
             # Loop through the folders and print their names
             for folder in $folders; do
-              #echo "$folder"
+              echo "$folder"
             done
 
             echo "$folders"   # This will print all the folder names at once instead of printing each on separate line.
