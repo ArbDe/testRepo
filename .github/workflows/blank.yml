@@ -21,7 +21,7 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk '{print $1,$2}' | xargs -n 1 basename)
+            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive "Contents[?LastModified<=\`$(date -v-1d '+%Y-%m-%d')\`][].{object: Key}" | awk '{print $1}' | xargs -n 1 basename)
             echo $folders
 
 
