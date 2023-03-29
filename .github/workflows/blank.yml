@@ -1,0 +1,34 @@
+name: "Delete old folders from S3"
+on:
+  push:
+  workflow_dispatch:
+  
+permissions:
+  id-token: write
+
+
+jobs:
+  remove:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Configure AWS credentials
+      uses: aws-actions/configure-aws-credentials@v1
+      with:
+        role-to-assume: arn:aws:iam::116060500502:role/IAM-Delete-Folders
+        aws-region: us-east-1
+
+    - name: List S3 bucket folders
+      run: |
+        # List all folders in the bucket
+        folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive --human-readable --summarize | awk '/^ *[0-9.]+ *[MG] /{print $NF}' | sort -r | uniq)
+        # Loop through the folders and delete those that are older than 180 days
+        for folder in $folders; do
+          last_modified=$(aws s3 ls s3://awsbucketbeni/testFolder/$folder/ --recursive | sort | tail -n 1 | awk '{print $1 " " $2}')
+          last_modified_epoch=$(date -d "$last_modified" +%s)
+          cutoff=$(date -d "180 days ago" +%s)
+          if [ "$last_modified_epoch" -lt "$cutoff" ]; then
+            echo "Deleting folder: $folder"
+            aws s3 rm s3://awsbucketbeni/testFolder/$folder/ --recursive
+          fi
+        done
