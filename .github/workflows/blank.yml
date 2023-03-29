@@ -21,15 +21,19 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-        # List all folders in the bucket
-        folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive --human-readable --summarize | awk '/^ *[0-9.]+ *[MG] /{print $NF}' | sort -r | uniq)
-        # Loop through the folders and delete those that are older than 180 days
-        for folder in $folders; do
-          last_modified=$(aws s3 ls s3://awsbucketbeni/testFolder/$folder/ --recursive | sort | tail -n 1 | awk '{print $1 " " $2}')
-          last_modified_epoch=$(date -d "$last_modified" +%s)
-          cutoff=$(date -d "180 days ago" +%s)
-          if [ "$last_modified_epoch" -lt "$cutoff" ]; then
-            echo "Deleting folder: $folder"
-            aws s3 rm s3://awsbucketbeni/testFolder/$folder/ --recursive
-          fi
-        done
+            # List all folders in the bucket
+            folders=$(aws s3 ls s3://awsbucketbeni/testFolder/ --recursive | awk -F'/' 'NF==2{print $1}'|sort -u)
+
+            # Loop through the folders and print their names
+            for folder in $folders; do
+              last_modified=$(aws s3 ls "s3://awsbucketbeni/testFolder/$folder/" --recursive | sort | tail -n 1 | awk '{print $1,$2}')
+              last_modified_epoch=$(date -d "$last_modified" +%s)
+              cutoff=$(date -d "180 days ago" +%s)
+
+              if [ "$last_modified_epoch" -lt "$cutoff" ]; then
+                echo "Deleting folder: $folder"
+                # aws s3 rm "s3://awsbucketbeni/testFolder/$folder/" --recursive # Un-comment to delete.
+              else
+                echo "$folder"
+               fi 
+            done
