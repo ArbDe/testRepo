@@ -24,10 +24,10 @@ jobs:
             now=$(date +%s)
             cutOff=$(date -d '-30 minutes' +%s)
             folders=$(aws s3api list-objects --bucket beni-bucket --prefix testFolder/ )
-            #for folder in $folders; do
-             # echo $folder
-            #done
-              echo $folders
+            for folder in $folders; do
+              echo $folder
+            done
+            #  echo $folders
 
 
 
