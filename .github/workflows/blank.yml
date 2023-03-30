@@ -31,7 +31,7 @@ jobs:
             # done
             for i in "${array[@]}"
             do
-              echo ${array[i]}
+              echo $i
               
             done
             
