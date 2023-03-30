@@ -24,7 +24,7 @@ jobs:
             now=$(date +%s)
             cutOff=$(date -d '-30 minutes' +%s)
             echo $cutOff
-            folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $2 "," $4}' >> files.txt)
+            folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $2 "," $4}')
             for folder in $folders; do
               echo $folder
             done
