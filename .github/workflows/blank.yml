@@ -26,6 +26,7 @@ jobs:
             echo $cutOff
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1 ","}')
             #for folder in $folders; do
+            echo $array
             IFS=',' read -r -a array <<< "$folders"  
 
             # done
