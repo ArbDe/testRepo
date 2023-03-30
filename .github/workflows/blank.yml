@@ -23,8 +23,11 @@ jobs:
       run: |
             folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive | sort | awk '{print $2 "," $4}' )
             
-            echo $folders
+            #echo $folders
 
-            #for folder in $folders; do
-            #  echo $folder
-            #done
+            for folder in $folders; do
+              last_modified_epoch=$(date -d "folders" +%s)
+              echo $folder
+              echo $last_modified_epoch
+              
+            done
