@@ -29,7 +29,12 @@ jobs:
             IFS=',' read -r -a array <<< "$folders"  
 
             # done
-            echo ${array[@]}
+            for i in "${array[@]}"
+            do
+              echo ${array[i]}
+              
+            done
+            
 
 
 
