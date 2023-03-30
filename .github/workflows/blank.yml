@@ -23,7 +23,7 @@ jobs:
       run: |
             now=$(date +%s)
             cutOff=$(date -d '-30 minutes' +%s)
-            folders=$(aws s3api list-objects --bucket beni-bucket --prefix testFolder/ )
+            folders=$(aws s3api list-objects --bucket beni-bucket --prefix testFolder/ --query 'Contents[?LastModified>=`'"$cutOff"'`].Key' --output text) )
             for folder in $folders; do
               echo $folder
             done
