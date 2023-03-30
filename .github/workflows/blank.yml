@@ -28,7 +28,7 @@ jobs:
             #for folder in $folders; do
            
             # done
-            echo $folders
+            echo $folders[1]
 
 
 
