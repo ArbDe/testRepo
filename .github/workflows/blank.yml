@@ -15,15 +15,15 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-       aws-access-key-id: AKIA6BIPVMUD24P2CY6F
-       aws-secret-access-key: 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
+       aws-access-key-id: AKIAYJLMCLOUOEFGMSF3
+       aws-secret-access-key: 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
        aws-region: us-east-1
 
     - name: List S3 bucket folders
       run: |
             now=$(date +%s)
             cutOff=$(date -d '-30 minutes' +%s)
-            folders=$(aws s3api list-objects --bucket beni-bucket --prefix testFolder/ --query 'Contents[?LastModified>=`'"$cutOff"'`].Key' --output text) )
+            folders=$(aws s3api list-objects --bucket beni-bucket1 --prefix testFolder/ --query 'Contents[?LastModified>=`'"$cutOff"'`].Key' --output text) )
             for folder in $folders; do
               echo $folder
             done
