@@ -21,17 +21,11 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive --human-readable | sort -r)
-            
-            #echo $folders
-
+            now=$(date +%s)
+            cutOff=$((now - (30*60)))
+            folders=$(aws s3api list-objects --bucket beni-bucket --prefix testFolder/ --query 'Contents[?LastModified<`'$cutOff'`].Key' --output text)
             for folder in $folders; do
-              last_modified=$(aws s3 ls s3://beni-bucket/testFolder/)
-              timestamp=$(echo "$folder" | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}') 
-              
-              echo "$(date -d "${timestamp}" +%s) $folder"
-              
-              #echo $folder
+              echo $folder
             done
 
 
