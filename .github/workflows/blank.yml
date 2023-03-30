@@ -21,13 +21,25 @@ jobs:
 
     - name: List S3 bucket folders
       run: |
-            folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive | sort | tail -n 1 | awk '{print $1 " " $4}' )
+            folders=$(aws s3 ls s3://beni-bucket/testFolder/ --recursive --human-readable | sort -r)
             
             #echo $folders
 
             for folder in $folders; do
-              last_modified_epoch=$(date -d "$folders" +%s)
-              echo $folder
-              echo $last_modified_epoch
+              last_modified=$(aws s3 ls s3://beni-bucket/testFolder/)
+              timestamp=$(echo "$folder" | grep -oE '[0-9]{2}:[0-9]{2}:[0-9]{2}') 
               
+              echo "$(date -d "${timestamp}" +%s) $folder"
+              
+              #echo $folder
             done
+
+
+
+
+
+
+
+
+
+
