@@ -36,7 +36,7 @@ jobs:
             
 
             for element in "${arr[@]}"; do
-                if [ "$element" = '2023-03-31' ]; then
+                if [ "$element" = '12:17:47' ]; then
                     newArr+=("$element")
                 fi
             done
