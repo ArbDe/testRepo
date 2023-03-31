@@ -15,8 +15,8 @@ jobs:
     - name: Configure AWS credentials
       uses: aws-actions/configure-aws-credentials@v1
       with:
-       aws-access-key-id: AKIARHOCZXC3Y6QUXKBH
-       aws-secret-access-key: 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
+       aws-access-key-id: AKIARQARJQ6T3H3PV3EO
+       aws-secret-access-key: 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
        aws-region: us-east-1
 
     - name: List S3 bucket folders
