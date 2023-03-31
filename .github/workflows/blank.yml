@@ -27,20 +27,22 @@ jobs:
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1}')
             
             arr=()
-            
-            echo $folders
-            for folder in $folders; do
-              arr+=($folder)
-              #if [$folder == '2023-03-31']
-              #then
-                echo $folder
-              #fi
+
+            for val in "$@"; do
+              arr+=("$val")
             done
-            
+
+            for folder in $folders; do
+              if [[ " ${arr[@]} " =~ " ${folder} " ]]; then
+                echo "$folder"
+              fi
+              arr+=("$folder")
+            done
+
             for value in "${arr[@]}"; do
-              echo $value 
-            done          
-       
+              echo "$value" 
+            done
+
             
 
 
