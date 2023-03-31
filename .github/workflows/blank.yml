@@ -27,6 +27,8 @@ jobs:
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1 ","}')
             #for folder in $folders; do
             echo $array
+            echo $folders
+            
             IFS=',' read -r -a array <<< "$folders"  
 
             # done
@@ -38,6 +40,10 @@ jobs:
               
             done
             
+
+
+
+
 
 
 
