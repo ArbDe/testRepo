@@ -26,24 +26,17 @@ jobs:
             echo $cutOff
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1}')
             
-            arr=()
+            newArr=()
 
-            for val in "$@"; do
-              arr+=("$val")
+            for element in "${folders[@]}"; do
+                if [ "$element" = '11:58:37' ]; then
+                    newArr+=("$element")
+                fi
             done
 
-            for folder in $folders; do
-              if [[ " ${arr[@]} " =~ " ${folder} " ]]; then
-                echo "$folder"
-              fi
-              arr+=("$folder")
-            done
-            
-            echo "${arr[*]}"
-            
-            #for value in "${arr[@]}"; do
-            # echo "$value" 
-            #done
+            echo "${newArr[@]}"
+
+          
 
             
 
