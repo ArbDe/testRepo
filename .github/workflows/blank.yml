@@ -25,18 +25,17 @@ jobs:
             cutOff=$(date -d '-30 minutes' +%s)
             echo $cutOff
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1 ","}')
-            #for folder in $folders; do
-            echo $array
-            echo $folders
+            for folder in $folders; do
+              echo $folders
+            done
             
-            #IFS=',' read -r -a array <<< "$folders"  
-
-            echo $array
+            :'echo $array
+            
             for i in "${array[@]}"
             do
               echo $[i]
               
-            done
+            done'
             
 
 
