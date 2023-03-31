@@ -37,7 +37,7 @@ jobs:
               #fi
             done
             
-            for value in ${$arr[@]}; do
+            for value in "${arr[@]}"; do
               echo $value 
             done          
        
