@@ -29,8 +29,8 @@ jobs:
               if [$folder -eq '2023-03-31']
               then
                 echo $folder
-              
-              done
+              fi
+            done
             
        
             
