@@ -26,6 +26,8 @@ jobs:
             echo $cutOff
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1}')
             
+            echo $fodlers 
+            
             newArr=()
 
             for element in "${folders[@]}"; do
