@@ -38,7 +38,9 @@ jobs:
               fi
               arr+=("$folder")
             done
-
+            
+            echo "${arr[*]}"
+            
             #for value in "${arr[@]}"; do
             # echo "$value" 
             #done
