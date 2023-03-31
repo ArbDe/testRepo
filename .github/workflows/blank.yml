@@ -25,11 +25,12 @@ jobs:
             cutOff=$(date -d '-30 minutes' +%s)
             echo $cutOff
             folders=$(aws s3 ls s3://beni-bucket1/testFolder/ --recursive | sort | awk '{print $1 ","}')
+            echo $folders
             for folder in $folders; do
-              if [$folder == '2023-03-31,']
-              then
+              #if [$folder == '2023-03-31']
+              #then
                 echo $folder
-              fi
+              #fi
             done
             
        
